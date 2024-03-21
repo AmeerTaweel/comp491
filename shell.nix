@@ -3,7 +3,9 @@
 {pkgs ? (import ./nixpkgs.nix) {}}: {
   default = pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
+      just
       crow
+      asio
     ];
   };
 }
