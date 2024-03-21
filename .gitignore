@@ -1,2 +1,5 @@
 # Direnv Cache
 .direnv/
+
+# LSP Cache
+.ccls-cache/
