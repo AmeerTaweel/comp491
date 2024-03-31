@@ -5,15 +5,6 @@
 
 }
 
-/* @media screen and (min-width:768px){ */
-/**/
-/*     .leftside .rightside { */
-/**/
-/*         height:100vh */
-/*          */
-/*     } */
-/**/
-/* } */
 .dropdown-container {
     text-align: center;
     margin-bottom: 10px;
@@ -36,14 +27,6 @@
     padding: 0;
     overflow-y: scroll;
     overflow-x: scroll;
-}
-
-.leftside {
-    background:red;
-}
-
-.rightside {
-    background:blue;
 }
 
 .dropdown-label {

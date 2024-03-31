@@ -17,62 +17,87 @@
 
 <body>
 
+    <!-- This is the whole screen -->
     <div class="row no-gutters">
 
-        <div class="col no-gutters leftside">
+        <!-- Left side of main screen (1D heatmap) -->
+        <div class="col no-gutters">
 
+            <!-- Dropdown Menu for GPU Selection -->
             <div>
-
                 <button onclick="previousOption()"><<</button>
-
                 <select id="gpu_dropdown">
                     {{#gpus}}
                         <option value="gpu{{.}}">GPU {{.}}</option>
                     {{/gpus}}
                 </select>
-
                 <button onclick="nextOption()">>></button>
-
             </div>
 
             <hr />
+            <h1>Objects owned by GPU</h1>
 
-            <h2>Left Side</h2>
+            <!-- 1D Heatmap -->
+            <div>
+            </div>
+
             <p>Some text for the left side.</p>
-
         </div>
 
-        <div class="col no-gutters rightside">
+        <!-- Right side of the main screen (2D heatmap) -->
+        <div class="col no-gutters">
 
-            <div>
+            <!-- This is for the two menus you choose from -->
+            <div class="row no-gutters">
 
-            <div class="dropdown-container">
-                <label for="object_select" class="dropdown-label">Object Selection:</label>
-                <select id="object_select">
-                    {{#object-selection}}
-                        <option value="{{.}}">{{.}}</option>
-                    {{/object-selection}}
-                </select>
+                <!-- This is for the object select menu -->
+                <div class="col no-gutters dropdown-container">
+                    <label for="object_select" class="dropdown-label">Choose
+                            an object to view in 2D</label>
+
+                    <select id="object_select">
+                        {{#object-selection}}
+                            <option value="{{.}}">{{.}}</option>
+                        {{/object-selection}}
+                    </select>
+
+                    <label for="dimension_select" class="dropdown-label">You
+                            selected: </label>
+                </div>
+
+                <!-- This is for the dimension select menu -->
+                <div class="col no-gutters dropdown-container">
+                    <label for="dimension_select" class="dropdown-label">X-dimension</label>
+
+                    <select id="dimension_select">
+                        {{#dimension-selection}}
+                            <option value="{{.}}">{{.}}</option>
+                        {{/dimension-selection}}
+                    </select>
+
+                    <!-- This is for the two labels under the menu -->
+                    <div class="row no-gutters">
+                        <div class="col no-gutters">
+                            <label for="dimension_select"
+                                    class="dropdown-label">X-dimension is </label>
+                        </div>
+
+                        <div class="col no-gutters">
+                            <label for="dimension_select"
+                                    class="dropdown-label">Y-dimension is</label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="dropdown-container">
-                <label for="dimension_select" class="dropdown-label">Dimension Selection:</label>
-                <select id="dimension_select">
-                    {{#dimension-selection}}
-                        <option value="{{.}}">{{.}}</option>
-                    {{/dimension-selection}}
-                </select>
-            </div>
-
-            </div>
-
+            <!-- 2D Heatmap -->
             <div class="heatmap_canvas">
                 <h2>Right Side</h2>
                 <p>Some text for the Right side.</p>
             </div>
 
         </div>
-
     </div>
 
     <script src="../static/script.js"></script>

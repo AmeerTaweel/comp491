@@ -1,3 +1,4 @@
+// Increment Button Helper (GPU Menu)
 function previousOption() {
     var dropdown = document.getElementById("gpu_dropdown");
     var currentIndex = dropdown.selectedIndex;
@@ -9,6 +10,7 @@ function previousOption() {
     }
 }
 
+// Decrement Button Helper (GPU Menu)
 function nextOption() {
     var dropdown = document.getElementById("gpu_dropdown");
     var currentIndex = dropdown.selectedIndex;
@@ -19,4 +21,3 @@ function nextOption() {
         dropdown.selectedIndex = currentIndex + 1;
     }
 }
-
