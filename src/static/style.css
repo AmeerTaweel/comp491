@@ -1,0 +1,52 @@
+.leftside .rightside #canvas{
+
+    height:100vh;
+    width:100%;
+
+}
+
+/* @media screen and (min-width:768px){ */
+/**/
+/*     .leftside .rightside { */
+/**/
+/*         height:100vh */
+/*          */
+/*     } */
+/**/
+/* } */
+.dropdown-container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.dropdown-label {
+    font-weight: bold;
+}
+
+.dropdown-container select {
+    width: 100%;
+}
+
+#heatmap_canvas  {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-width: 1200px;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.leftside {
+    background:red;
+}
+
+.rightside {
+    background:blue;
+}
+
+.dropdown-label {
+    display: block;
+    margin-bottom: 5px;
+}

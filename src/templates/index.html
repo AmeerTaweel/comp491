@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Object View</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+    <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-heatmap.min.js"></script>
+    <script src="https://rawgit.com/gka/randomgraph.js/master/randomgraph.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="row no-gutters">
+
+        <div class="col no-gutters leftside">
+
+            <div>
+
+                <button onclick="previousOption()"><<</button>
+
+                <select id="gpu_dropdown">
+                    {{#gpus}}
+                        <option value="gpu{{.}}">GPU {{.}}</option>
+                    {{/gpus}}
+                </select>
+
+                <button onclick="nextOption()">>></button>
+
+            </div>
+
+            <hr />
+
+            <h2>Left Side</h2>
+            <p>Some text for the left side.</p>
+
+        </div>
+
+        <div class="col no-gutters rightside">
+
+            <div>
+
+            <div class="dropdown-container">
+                <label for="object_select" class="dropdown-label">Object Selection:</label>
+                <select id="object_select">
+                    {{#object-selection}}
+                        <option value="{{.}}">{{.}}</option>
+                    {{/object-selection}}
+                </select>
+            </div>
+
+            <div class="dropdown-container">
+                <label for="dimension_select" class="dropdown-label">Dimension Selection:</label>
+                <select id="dimension_select">
+                    {{#dimension-selection}}
+                        <option value="{{.}}">{{.}}</option>
+                    {{/dimension-selection}}
+                </select>
+            </div>
+
+            </div>
+
+            <div class="heatmap_canvas">
+                <h2>Right Side</h2>
+                <p>Some text for the Right side.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../static/script.js"></script>
+
+</body>
+</html>
+
