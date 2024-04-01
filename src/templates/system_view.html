@@ -19,25 +19,27 @@
 <body>
 
     <div class="row no-gutters leftside" id="leftside1">
+        <script>
+            var communications = []
+            {{#coms}}
+                communications.push("{{& .}}")
+            {{/coms}}
+            var graph = {nodes: [], links: []}
+            var used = []
+            for (let i = 0; i < communications.length; i++) {
+                var data = communications[i].split(":")
+                if(!used.includes(data[0])){
+                    graph.nodes.push({id: data[0], "label": "gpu"+ data[0]})
+                    used.push(data[0])
+                }
+                graph.links.push({source: parseInt(data[0]), target: parseInt(data[1]), coms: parseInt(data[2])}) }
+
+        </script>
 
         <div class="col no-gutters" id ="canvas1">
             <script type = "text/javascript" src = "../static/draw.js"></script>
             
             <script>
-                var communications = []
-                {{#coms}}
-                    communications.push("{{& .}}")
-                {{/coms}}
-                var graph = {nodes: [], links: []}
-                var used = []
-                for (let i = 0; i < communications.length; i++) {
-                    var data = communications[i].split(":")
-                    if(!used.includes(data[0])){
-                        graph.nodes.push({id: data[0], "label": "gpu"+ data[0]})
-                        used.push(data[0])
-                    }
-                    graph.links.push({source: parseInt(data[0]), target: parseInt(data[1]), coms: parseInt(data[2])}) }
-
                 draw_g(graph);
             </script>
             <!-- <svg id="graphSVG" width=1200 height=1200></svg> -->
@@ -49,6 +51,9 @@
             <div id="heatmap_canvas">
                 <script type = "text/javascript" src = "../static/heatmap.js"></script>
             </div>
+            <script>
+                draw_heatmap(graph);
+            </script>
 
         </div>
 

@@ -4,6 +4,9 @@
     width:100%;
 
 }
+.tick {
+    font-size: 20px;
+}
 
 #heatmap_canvas  {
     width: 100%;
