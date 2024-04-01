@@ -3,6 +3,3 @@
 
 # LSP Cache
 .ccls-cache/
-
-# Misc
-tmp/
