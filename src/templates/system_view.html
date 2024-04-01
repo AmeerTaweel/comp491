@@ -21,8 +21,15 @@
     <div class="row no-gutters leftside" id="leftside1">
 
         <div class="col no-gutters" id ="canvas1">
-
             <script type = "text/javascript" src = "../static/draw.js"></script>
+            
+            <script>
+                var communications = []
+                {{#coms}}
+                    communications.push("{{& .}}")
+                {{/coms}}
+                draw_communication_graph(communications);
+            </script>
 
         </div>
 

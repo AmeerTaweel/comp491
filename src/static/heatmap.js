@@ -4,11 +4,13 @@ var margin = {top: 30, right: 30, bottom: 30, left: 30},
 
 // append the svg object to the body of the page
 var svg = d3.select("#heatmap_canvas")
+.append("div")
+.attr("class", "chart")
 .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
 .append("g")
-  .attr("transform",
+.attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
 // Labels of row and columns
