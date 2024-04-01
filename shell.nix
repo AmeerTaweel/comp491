@@ -5,9 +5,13 @@
     nativeBuildInputs = with pkgs; [
       just
 
-      (python3.withPackages(ps: with ps; [bottle]))
+      (python3.withPackages(ps: with ps; [
+        bottle
+        spectra
+        numpy
+      ]))
 
-      # TODO: Remove legacy dependencies
+      # Legacy Dependencies
       crow
       asio
     ];
