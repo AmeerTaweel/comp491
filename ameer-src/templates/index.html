@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Metadata -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Snoopie Visualizer</title>
+
+		<!-- Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+		<!-- Prism - Syntax Highlighting -->
+		<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.js" integrity="sha256-rFpGp14r3gomlXcrHLI16T0sGFOr2/WJ33hQ27wi3z0=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha256-4CROCOz16nRjanuxMghkzZzCOdmwLXxFqCMCW7XG/lA=" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/match-braces/prism-match-braces.min.css" integrity="sha256-ofzmpw1bhHX6o2yPsxm/qv2HF/pxkmWJhQiMnlQ+4Tw=" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/match-braces/prism-match-braces.min.js" integrity="sha256-+5ZWEZo03rdvJF2quCewrodzNhHu9aDLctMge3kzqYU=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js" integrity="sha256-ronWqXsvaeyrdiX7YJfdYj0S5NbeMA5ilQQTrK25Jno=" crossorigin="anonymous"></script>
+
+		<!-- Load d3.js -->
+		<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" integrity="sha256-8glLv2FBs1lyLE/kVOtsSw8OQswQzHr5IfwVj864ZTk=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="container text-center">
+			<div class="row">
+				<div class="col">
+					<h3>Code</h3>
+
+					<pre>
+						<code class="language-cpp line-numbers rainbow-braces match-braces">
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+							int x = 5;
+							for (int i = 0; i == 10; i++) {
+								printf("%d\n", i);
+							}
+						</code>
+					</pre>
+				</div>
+				<div class="col">
+					<h3>Line Info</h3>
+
+					<!-- TODO: Dynamic line number -->
+					<b>Line 88</b>
+
+					<!-- TODO: Dynamic line text -->
+					<pre><code class="language-cpp">int x = 5;</code></pre>
+
+					<!-- TODO: Dynamic total transfers -->
+					<b>Total Transfers: 12</b><br/>
+
+					<b>Objects Updated:</b><br/>
+
+					<pre>flags[device]: 21</pre><br/>
+
+					<div class="container text-center">
+						<div class="row">
+							<div class="col">
+								<!-- Rendered by d3.js -->
+								<div id="heatmap"></div>
+							</div>
+							<div class="col">
+								<div id="heatmap-scale"></div>
+								{{> heatmap.mustache }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+
+// set the dimensions and margins of the graph
+const margin = {top: 80, right: 25, bottom: 30, left: 40},
+  width = 450 - margin.left - margin.right,
+  height = 450 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+const svg = d3.select("#heatmap")
+.append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+//Read the data
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv").then(function(data) {
+
+  // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
+  const myGroups = Array.from(new Set(data.map(d => d.group)))
+  const myVars = Array.from(new Set(data.map(d => d.variable)))
+
+  // Build X scales and axis:
+  const x = d3.scaleBand()
+    .range([ 0, width ])
+    .domain(myGroups)
+    .padding(0.05);
+  svg.append("g")
+    .style("font-size", 15)
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .select(".domain").remove()
+
+  // Build Y scales and axis:
+  const y = d3.scaleBand()
+    .range([ height, 0 ])
+    .domain(myVars)
+    .padding(0.05);
+  svg.append("g")
+    .style("font-size", 15)
+    .call(d3.axisLeft(y).tickSize(0))
+    .select(".domain").remove()
+
+  // Build color scale
+  const myColor = d3.scaleSequential()
+    .interpolator(d3.interpolateInferno)
+    .domain([1,100])
+
+  // create a tooltip
+  const tooltip = d3.select("#heatmap")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  const mouseover = function(event,d) {
+    tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+  const mousemove = function(event,d) {
+    tooltip
+      .html("The exact value of<br>this cell is: " + d.value)
+      .style("left", (event.x)/2 + "px")
+      .style("top", (event.y)/2 + "px")
+  }
+  const mouseleave = function(event,d) {
+    tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+  }
+
+  // add the squares
+  svg.selectAll()
+    .data(data, function(d) {return d.group+':'+d.variable;})
+    .join("rect")
+      .attr("x", function(d) { return x(d.group) })
+      .attr("y", function(d) { return y(d.variable) })
+      .attr("rx", 4)
+      .attr("ry", 4)
+      .attr("width", x.bandwidth() )
+      .attr("height", y.bandwidth() )
+      .style("fill", function(d) { return myColor(d.value)} )
+      .style("stroke-width", 4)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+})
+
+// Add title to graph
+svg.append("text")
+        .attr("x", 0)
+        .attr("y", -50)
+        .attr("text-anchor", "left")
+        .style("font-size", "22px")
+        .text("Data Transfers Heatmap");
+
+// Add subtitle to graph
+svg.append("text")
+        .attr("x", 0)
+        .attr("y", -20)
+        .attr("text-anchor", "left")
+        .style("font-size", "14px")
+        .style("fill", "grey")
+        .style("max-width", 400)
+        .text("TODO: do we need description?");
+
+
+</script>
+
+		<script>
+		const myColor = d3.scaleSequential()
+			.interpolator(d3.interpolateInferno)
+			.domain([1,100])
+
+		let n = 101;
+		const colors = [...Array(n).keys()].map(i => myColor(i))
+		const canvas = d3.select("#heatmap-scale").append("svg")
+		.attr("style", "display:block;shape-rendering:crispEdges;height:200px;width:33px;margin:0 -14px;cursor:pointer;")
+		.attr("viewBox", `0 0 20 ${n}`)
+		.attr("preserveAspectRatio", "none")
+
+		let ticks = [0, 50, 100]
+		for (const [i, c] of colors.entries()) {
+			canvas.append("rect")
+				.attr("x", 0)
+				.attr("y", i)
+				.attr("width", 10)
+				.attr("height", 1)
+				.attr("fill", c)
+			if (ticks.includes(i)) {
+				canvas.append("text")
+					.attr("x", 10)
+					.attr("y", i == 100 ? i - 5 : i + 5)
+					.attr("width", 10)
+					.attr("height", 10)
+					.text(i)
+					.style("font", "5px sans-serif")
+			}
+		}
+		</script>
+	</body>
+</html>
