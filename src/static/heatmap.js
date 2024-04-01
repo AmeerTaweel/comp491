@@ -1,6 +1,8 @@
 var margin = {top: 30, right: 30, bottom: 30, left: 30},
   width = 1200 - margin.left - margin.right,
   height = 1200 - margin.top - margin.bottom;
+
+// for tooltips to apear on heatmap squares
 var tooltip = d3.select("#heatmap_canvas")
         .append("div")
         .style("opacity", 0)
@@ -13,7 +15,7 @@ var tooltip = d3.select("#heatmap_canvas")
 
 function draw_heatmap(graph) {
 
-        // append the svg object to the body of the page
+    // append the svg object to the body of the page
     var svg = d3.select("#heatmap_canvas")
         .append("div")
         .attr("class", "chart")
@@ -24,20 +26,18 @@ function draw_heatmap(graph) {
         .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
 
-    // console.log(graph)
     // Build X scales and axis:
     var nodes = []
 
     for (var i = 0; i <  graph.nodes.length; i++){
         nodes.push(graph.nodes[i].label)
 
-        // console.log(graph.nodes[i].label)
     }
-    // console.log(nodes)
     var x = d3.scaleBand()
       .range([ 0, width ])
       .domain(nodes)
       .padding(0.01)
+
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x))
@@ -60,9 +60,9 @@ function draw_heatmap(graph) {
     var myColor = d3.scaleLinear()
       .range(["white", "#8000ff"])
       .domain([1, Math.max(...graph.links.map(o => o.coms))])
+
     svg.selectAll()
         .data(graph.links, function(d) {
-            // console.log(d)
             return d.source.label+':'+d.target.label;
         })
         .enter()
