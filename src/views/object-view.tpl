@@ -6,11 +6,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
-
-    <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-heatmap.min.js"></script>
-    <script src="https://rawgit.com/gka/randomgraph.js/master/randomgraph.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
 
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
@@ -27,13 +23,13 @@
 
             <!-- Dropdown Menu for GPU Selection -->
             <div class="gpu-dropdown-container">
-                <button onclick="previousOption(), updateGPU()"><<</button>
+                <button onclick="previousOption(), updateGPU()">&lt;&lt;</button>
                 <select id="gpu_dropdown" onchange="updategpu()">
-                    {{#gpus}}
-                        <option value="{{.}}">GPU {{.}}</option>
-                    {{/gpus}}
+				% for gpu in gpus:
+					<option value="{{gpu}}">GPU {{gpu}}</option>
+				% end
                 </select>
-                <button onclick="nextOption(), updateGPU()">>></button>
+                <button onclick="nextOption(), updateGPU()">&gt;&gt;</button>
             </div>
 
             <hr />
@@ -59,9 +55,9 @@
                             an object to view in 2D</label>
 
                     <select id="object_select" onchange="updateObjectLabel()">
-                        {{#object-selection}}
-                            <option value="{{.}}">{{.}}</option>
-                        {{/object-selection}}
+					% for obj_sel in object_selection:
+						<option value="{{obj_sel}}">{{obj_sel}}</option>
+					% end
                     </select>
 
                     <label id="object_label" class="dropdown-label">You selected: </label>
@@ -74,9 +70,9 @@
                     <select id="dimension_select"
                             onchange="updateDimensionLabels()
                             updateDimensionLabels()">
-                        {{#dimension-selection}}
-                            <option value="{{.}}">{{.}}</option>
-                        {{/dimension-selection}}
+						% for dim_sel in dimension_selection:
+							<option value="{{dim_sel}}">{{dim_sel}}</option>
+						% end
                     </select>
 
                     <!-- This is for the two labels under the menu -->
@@ -106,7 +102,7 @@
         </div>
     </div>
 
-    <script src="../static/script.js"></script>
+    <script src="/static/script.js"></script>
 
 </body>
 </html>
