@@ -18,7 +18,6 @@ vector<string> parse_communication(){
         infile >> temp2;
     }
     while(infile >> temp2) {
-        // strtok(temp, " , "); 
         size_t pos;
         int i = 0;
         while (( pos = temp2.find(delim)) != string::npos){
@@ -32,7 +31,6 @@ vector<string> parse_communication(){
             i++;
         } 
         temp2 = source + ":" + target; 
-        // if (temp.find(temp2) == temp.end()) temp[temp2] = 0;
         temp[temp2]++; 
     }
     for (auto i = temp.begin(); i != temp.end(); i++) 
@@ -50,7 +48,6 @@ int main() {
         crow::response res;
         res.set_static_file_info("./static/style.css");
         auto page = crow::mustache::load("system_view.html");
-        // vector<map<string, string>> sth;
         auto coms = parse_communication();
         
         crow::mustache::context ctx;
