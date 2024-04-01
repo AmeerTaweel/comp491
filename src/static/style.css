@@ -33,3 +33,19 @@
     display: block;
     margin-bottom: 5px;
 }
+
+.gpu-dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.gpu-dropdown-container button {
+    margin: 0;
+}
+
+.gpu-dropdown-container select {
+    flex: 1;
+    margin: 0 10px;
+}
