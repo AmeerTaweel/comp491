@@ -42,8 +42,15 @@ def code_view():
         "#FCFFA4"
     ])
     l = 10
-    data   = (np.random.rand(l, l) * 10).astype(int)
+    data = (np.random.rand(l, l) * 10).astype(int)
     return template("code-view", data=data, colorscale=colorscale)
+
+
+@route("/system-view")
+def system_view():
+    l = 10
+    comms = (np.random.rand(l, l) * 11).astype(int)
+    return template("system-view", comms = comms)
 
 
 @route("/object-view")
