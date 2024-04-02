@@ -5,7 +5,7 @@
     <title>Object View</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/ahmad-style.css">
 
     <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.12.0/js/anychart-heatmap.min.js"></script>
@@ -31,24 +31,26 @@
     </div>
     <div class="row no-gutters leftside" id="leftside1">
         <script>
-            var communications = []
-            {{#coms}}
-                communications.push("{{& .}}")
-            {{/coms}}
-            var graph = {nodes: [], links: []}
-            var used = []
-            for (let i = 0; i < communications.length; i++) {
-                var data = communications[i].split(":")
-                if(!used.includes(data[0])){
-                    graph.nodes.push({id: data[0], "label": "gpu"+ data[0]})
-                    used.push(data[0])
+            % import json
+            % import numpy as np
+
+            let comms = {{json.dumps(comms.tolist())}}
+            let rows = {{np.shape(comms)[0]}}
+            let cols = {{np.shape(comms)[1]}}
+
+            let graph = {nodes: [], links: []}
+            let used = []
+            for (let row = 0; row < rows; row++) {
+                graph.nodes.push({id: row, label: `gpu${row}`})
+                for (let col = 0; col < cols; col++) {
+                    graph.links.push({source: row, target: col, coms: comms[row][col]})
                 }
-                graph.links.push({source: parseInt(data[0]), target: parseInt(data[1]), coms: parseInt(data[2])}) }
+            }
 
         </script>
 
         <div class="col no-gutters" id ="canvas1">
-            <script type = "text/javascript" src = "../static/draw.js"></script>
+            <script type = "text/javascript" src = "/static/ahmad-draw.js"></script>
             
             <script>
                 draw_g(graph);
@@ -59,7 +61,7 @@
         <div class="col no-gutters rightside">
 
             <div id="heatmap_canvas">
-                <script type = "text/javascript" src = "../static/heatmap.js"></script>
+                <script type = "text/javascript" src = "/static/ahmad-heatmap.js"></script>
             </div>
             <script>
                 draw_heatmap(graph);
