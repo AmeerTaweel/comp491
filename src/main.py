@@ -48,7 +48,7 @@ def code_view():
 
 @route("/system-view")
 def system_view():
-    l = 10
+    l = 4
     comms = (np.random.rand(l, l) * 11).astype(int)
     return template("system-view", comms = comms)
 

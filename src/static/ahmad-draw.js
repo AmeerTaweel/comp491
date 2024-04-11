@@ -87,11 +87,16 @@ function draw_g (graph) {
             .data(graph.nodes)
             .enter().append("g");
 
+    // labels for edges
     svg.selectAll(".comsText")
         .data(graph.links)
         .enter().append("text")
+        .style("font-family", "Arial")
+        .style("font-size", "40px")
+        .attr("font-weight", "bold")
+        .attr("stroke", "white")
         .attr("class", "arclabels")
-        .attr("dy", -13)
+        .attr("dy", 16)
         .append("textPath")
         .text(d => d.coms)
         .attr("xlink:href", d => "#link"+d.source.id+"-"+d.target.id)
