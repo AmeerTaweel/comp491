@@ -1,3 +1,13 @@
+% include("head.tpl")
+
+% import numpy as np
+
+% x_axis = tuple(("0","10","20","30","40"))
+% y_axis = tuple(f"GPU{i}" for i in range(np.shape(data)[0]))
+% dmin   = np.min(data)
+% dmax   = np.max(data)
+% ticks = (dmin, ((dmax - dmin) // 2) + dmin, dmax)
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +46,23 @@
             <h1 id="gpu_heading">Objects owned by GPU</h1>
 
             <!-- 1D Heatmap -->
-            <div>
+            <div class="container justify-content-center">
+                <%
+                        include(
+                                "1dheatmap.tpl",
+                                id = "object-view-heatmap",
+                                width = "100%",
+                                height = "40vh",
+                                data   = data,
+                                x_axis = x_axis,
+                                y_axis = y_axis,
+                                ticks  = ticks,
+                                colorscale   = colorscale,
+                                x_axis_title = "Offset"
+                        )
+                %>
             </div>
 
-            <p>Some text for the left side.</p>
         </div>
 
 

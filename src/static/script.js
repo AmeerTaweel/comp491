@@ -42,9 +42,6 @@ function updateDimensionLabels() {
 	document.getElementById("y_dimension_label").innerText = "Y-dimension is " + xDimension;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-        updateGPU();
-});
 
 function draw2DHeatmap() {
 	var xDimension = document.getElementById("dimension_select").value;
@@ -111,3 +108,7 @@ function draw2DHeatmap() {
 			.style("fill", function (d) { return myColor(d.value) })
 	})
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+        updateGPU();
+});
