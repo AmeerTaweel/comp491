@@ -41,10 +41,11 @@ function draw_g (graph) {
         .style("fill", "none")
         .attr("stroke", d => color(d.source.id))
         .attr("stroke-width", d => d.coms + 1)
-        .attr("marker-end", d => "url(#arrowhead" + d.source.id + ")")
         .attr("stroke", d => color(d.source.id))
+        .attr("marker-end", d => "url(#arrowhead" + d.source.id + ")")
 
 
+    // arrows heads
     svg.append('defs')
         .selectAll('marker')
         .data(graph.links)
@@ -56,11 +57,12 @@ function draw_g (graph) {
         .attr('refY', 0)
         .attr('orient','auto')
         .attr('xoverflow','visible')
+        .attr("markerWidth",  "20")
+        .attr("markerHeight", "20")
+        // makes the stroke width irrelevant and only uses markerWidth and markerHeight
+        .attr('markerUnits', 'userSpaceOnUse')             
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
-        .attr('markerWidth', d => d.coms)
-        .attr('markerHeight',d => d.coms)
-
         .attr("stroke", d => color(d.source.id))
         .attr("fill", d => color(d.source.id))
 
@@ -128,22 +130,22 @@ function draw_g (graph) {
               return "M" + d.source.x + "," + d.source.y 
                 + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
         });
-  link.attr("d", function(d) {
+    link.attr("d", function(d) {
 
-        // length of current path
-        var pl = this.getTotalLength(),
-          // radius of circle plus backoff
-          r = nodeRadius + 10,
-          // position close to where path intercepts circle
-          m = this.getPointAtLength(pl - r);
+          // length of current path
+          var pl = this.getTotalLength(),
+            // radius of circle plus backoff
+            r = nodeRadius + 10,
+            // position close to where path intercepts circle
+            m = this.getPointAtLength(pl - r);
 
-        var dx = m.x - d.source.x,
-          dy = m.y - d.source.y,
-          dr = Math.sqrt(dx * dx + dy * dy);
+          var dx = m.x - d.source.x,
+            dy = m.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
 
-        return "M" + d.source.x + "," + d.source.y 
-          + "A" + dr + "," + dr + " 0 0,1 " + m.x + "," + m.y;
-  });
+          return "M" + d.source.x + "," + d.source.y 
+            + "A" + dr + "," + dr + " 0 0,1 " + m.x + "," + m.y;
+    });
 
     node
         .attr("cx", function(d) { return d.x; })
