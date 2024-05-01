@@ -29,18 +29,21 @@
             % import json
             % import numpy as np
 
-            let comms = {{json.dumps(comms.tolist())}}
-            let rows = {{np.shape(comms)[0]}}
-            let cols = {{np.shape(comms)[1]}}
-
+            let comms = {{!comms}}
             let graph = {nodes: [], links: []}
-            let used = []
-            for (let row = 0; row < rows; row++) {
-                graph.nodes.push({id: row, label: `gpu${row}`})
-                for (let col = 0; col < cols; col++) {
-                    if (col == row) continue;
-                    graph.links.push({source: row, target: col, coms: comms[row][col]})
+            let used  = []
+
+            for (let i = 0; i < comms.length; i++) {
+                var data = comms[i].split(":")
+                if(!used.includes(data[0])){
+                    graph.nodes.push({id: data[0], "label": "gpu"+ data[0]})
+                    used.push(data[0])
                 }
+                if(!used.includes(data[1])){
+                    graph.nodes.push({id: data[1], "label": "gpu"+ data[1]})
+                    used.push(data[1])
+                }
+                graph.links.push({source: parseInt(data[0]), target: parseInt(data[1]), coms: parseInt(data[2])}) 
             }
 
         </script>

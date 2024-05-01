@@ -18,6 +18,7 @@ var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 var simulation = d3.forceSimulation()
 
+const threashold = 10
 function draw_g (graph) {
         simulation.force("link", d3.forceLink().distance(graph.nodes.length * 200).id(function(d) { return d.id; }))
         .force("charge", d3.forceManyBody())
@@ -40,9 +41,10 @@ function draw_g (graph) {
         .attr("id", d => "link" + d.source.id + "-" + d.target.id)
         .style("fill", "none")
         .attr("stroke", d => color(d.source.id))
-        .attr("stroke-width", d => d.coms + 1)
+        .attr("stroke-width", d => ((d.coms >= threashold) ? threashold : d.coms + 1))
         .attr("stroke", d => color(d.source.id))
         .attr("marker-end", d => "url(#arrowhead" + d.source.id + ")")
+
 
 
     // arrows heads
