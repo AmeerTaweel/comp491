@@ -66,4 +66,49 @@ def object_view():
     )
 
 
+@route("/device-view")
+def code_view():
+    device = 0
+
+    # object, count, destination
+    objects = (
+        ("total"             , 16, 1),
+        ("flags[device]"     , 16, 1),
+        ("total"             , 47, 3),
+        ("glob_queue[device]", 40, 3),
+        ("flags[device]"     , 33, 1),
+    )
+
+    # line, count, destination
+    code_lines = (
+        (67 , 16, 1),
+        (84 , 16, 1),
+        (88 , 47, 3),
+        (119, 40, 3),
+        (114, 33, 1),
+        (200, 40, 3),
+        (210, 33, 1),
+        (211, 40, 3),
+        (212, 33, 1),
+    )
+
+    # instruction, count, destination
+    instructions = (
+        ("LD.E.STRONG.SYS", 7 , 3),
+        ("STG.E"          , 8 , 3),
+        ("total"          , 16, 1),
+        ("ST.E.STRONG.SYS", 16, 1),
+        ("LDG.E"          , 32, 3),
+        ("total"          , 47, 3),
+    )
+
+    return template(
+        "device-view",
+        device=device,
+        objects=objects,
+        code_lines=code_lines,
+        instructions=instructions
+    )
+
+
 run(host = SERVER_HOST, port = SERVER_PORT)
