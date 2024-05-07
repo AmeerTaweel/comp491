@@ -67,7 +67,7 @@ def object_view():
 
 
 @route("/device-view")
-def code_view():
+def device_view():
     device = 0
 
     # object, count, destination
