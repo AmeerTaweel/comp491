@@ -48,8 +48,31 @@ def code_view():
 
 @route("/system-view")
 def system_view():
-    l = 10
-    comms = (np.random.rand(l, l) * 11).astype(int)
+    # l = 4
+    # comms = (np.random.rand(l, l) * 11).astype(int)
+    logfile = open("/home/ahmed/Documents/uni/COMP491/comp491/tmp/stencil-nvshmem_nvidia/snoopie_log_891544", "r")
+    logs = logfile.readlines()
+
+    commsDict = {}
+    for i,log in enumerate(logs):
+        if i == 0:
+            continue
+        logdata = log.split(",")
+        commSR = logdata[3] + ":" + logdata[4]
+        if commSR not in commsDict.keys():
+            commsDict[commSR] = 0
+        else:
+            commsDict[commSR] += 1
+    comms = []
+    for i in commsDict:
+        comms.append(i + ":" + str(commsDict[i]))
+    print(comms)
+    # print(comms)
+
+        
+    # for i, log in logs:
+        
+    logfile.close()
     return template("system-view", comms = comms)
 
 
