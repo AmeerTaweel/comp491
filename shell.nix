@@ -7,6 +7,8 @@
         bottle
         spectra
         numpy
+        matplotlib
+        pandas
       ]))
 
       # Legacy Dependencies

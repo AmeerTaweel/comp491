@@ -125,13 +125,18 @@
 			% y  = round(vh - size_ax - size_ax_x_title, 2)
 
 			% cols = np.shape(data)[1]
+			% rows = len(vals_dict)
 
-			% for col in range(len(x_axis)):
-				% w = round(w_map / cols, 2)/4
-				% x  = round(size_ax_y_title + size_ax, 2) + (10 * col * w)
-				% y1 = round((vh - size_ax - size_ax_x_title), 2)
-				% y2 = round((vh - size_ax - size_ax_x_title) + size_ax * ratio_axis_tick, 2)
-				<line x1="{{x}}" y1="{{y1}}" x2="{{x}}" y2="{{y2}}"/>
+			% for row in range(rows):
+				% h  = round((vh - size_ax - size_ax_x_title) / rows, 2)
+				% y_new  = round(row * h + 0.5 * h, 2) - (h/4)
+				% for col in range(len(x_axis) - 1):
+					% w = round(w_map / cols, 2)/4
+					% x  = round(size_ax_y_title + size_ax, 2) + (10 * col * w)
+					% y1 = round((vh - size_ax - size_ax_x_title), 2) - y_new
+					% y2 = round((vh - size_ax - size_ax_x_title) + size_ax * ratio_axis_tick, 2) - y_new
+					<line x1="{{x}}" y1="{{y1}}" x2="{{x}}" y2="{{y2}}"/>
+				% end
 			% end
 
 			% for col in range(len(x_axis)):
