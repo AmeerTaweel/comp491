@@ -1,0 +1,113 @@
+********************************************************************************
+Requirements
+********************************************************************************
+
+hierarchical visualization
+  - system level
+
+the kind of data we need is not for discussion. but we can change the way we
+represent the data.
+
+we either work at the process level or thread level or a mix
+
+may need to merge multiple log files (it will not be in one file)
+
+no host in system view heatmap
+make the host very visible (make it special in a way)
+u may have multiple hosts
+
+object view up to 4 gpus
+we need to support more (drop down or something) (select node then gpu)
+most of the nodes are the same, show outliers
+think about scalability, but get at least node level version working fully
+
+shrink the log file size
+how to handle large log files
+
+check log file format from the viz paper
+
+********************************************************************************
+Notes 1
+********************************************************************************
+
+- objects accessed: might be same array in memory
+- try to take calling context into account when calculating percentages for each
+  files
+- probably hard to figure out name of variable from line text
+
+- node size based on amount of communication (with predefined min and max)
+
+- add host in the visualization (system view graph) (use different shape like
+  square)
+
+- try to download and use nsight systems (and other tools) to check options
+- look at hpc toolkit visualizations
+- get a feeling of profiling tools
+- hpctoolkit has a nice source-code line attribution view (use online pics / paper / docs)
+- nsight compute has a nice source-code line attribution view
+
+- object view:
+  - few gpus -> click directly
+  - more gpus -> dropdown
+  - the drop down should be two levels (node level and then gpu from node)
+  - support multiple gpus selected at once (for later / priority 0.1)
+  - dropdown for node selection
+  - direct click for gpu in specific node (at most 16)
+  - dropdown menu has a list of objects (show both object name -if available-
+    with object id)
+
+- maybe reuse some of the old visualizer
+
+- investiagte multiple logfile options (redis protobuf sqllite mysql)
+
+SNOOPIE COLORS LINK (from Emir Gencer)
+
+https://seaborn.pydata.org/tutorial/color_palettes.html
+
+related lines in old visualizer (i think)
+
+```
+    pal_base = sns.blend_palette(pal_base, n_colors=8)
+    pal = sns.color_palette(
+        [scale_lightness(color, 1.2) for color in pal_base]
+    ).as_hex()
+    pal2 = sns.color_palette(
+        [scale_lightness(color, 1.0) for color in pal_base]
+    ).as_hex()
+```
+
+********************************************************************************
+Notes 2
+********************************************************************************
+
+- use real data / time to parse real log files
+- allow users to group and filter nodes for system view
+- object view 1d heatmap x-axis text rotation make it 90 degrees
+
+********************************************************************************
+Notes 3
+********************************************************************************
+
+Device View {
+  clicking code line should jump to the line in code-view
+  tooltip for each table explaining what the info mean (hover over i icon)
+  add default value for objects with empty string as name (and maybe show which line in code)
+}
+
+********************************************************************************
+Notes 4
+********************************************************************************
+
+system view notes in markup
+  TODO: Make me more pretty and informative {data.logs_dir}
+  name of application
+  number of gpus
+  etc etc etc
+
+each page should have subheaders
+
+add about page
+
+move page links to the right of navbar
+
+increase font size of navbar and table headers

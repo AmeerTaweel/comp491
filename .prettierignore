@@ -1,0 +1,5 @@
+# Ignore files for PNPM, NPM, YARN and Nix
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+flake.lock

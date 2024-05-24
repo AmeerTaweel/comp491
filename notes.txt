@@ -1,0 +1,38 @@
+********************************************************************************
+May 21
+********************************************************************************
+
+DONE:
+
+- Edge thickness based on communication amount (with predefined and configurable min and max)
+- Show that edge arrow heads are independet of edge thickness
+- Capitalize "gpu" in System View
+- Global setting for (transfer count / byte count)
+- Flip y-axis in heatmap so that (0, 0) is at the origin
+- Device View: Alternate row background in table
+- Device View: Clicking on a column should sort by that column
+- Device View: Limit row count, user needs to scroll for more
+- Device View: Ability to change GPU dynamically
+
+QUESTIONS:
+
+- How should I get the object name in the device view?
+
+********************************************************************************
+May 14
+********************************************************************************
+
+DONE:
+
+- Switched to Svelte
+- Use Tailwind CSS
+- Use Flowbite Svelte for components
+- Light / dark mode
+- Created navbar
+- Current page highlighted in navbar
+- Used Emre's icon
+- Add footer with funding text
+
+ISSUES:
+
+- Log files are not proper CSV. They contain spaces in the header...

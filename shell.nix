@@ -3,15 +3,10 @@
 {pkgs ? (import ./nixpkgs.nix) {}}: {
   default = pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
-      (python3.withPackages(ps: with ps; [
-        bottle
-        spectra
-        numpy
-      ]))
-
-      # Legacy Dependencies
-      crow
-      asio
+      nodejs
     ];
+    shellHook = ''
+      export PATH="$PWD/node_modules/.bin/:$PATH"
+    '';
   };
 }
