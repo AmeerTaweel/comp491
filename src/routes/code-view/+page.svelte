@@ -126,7 +126,7 @@
 			<h4 class="mb-4 font-bold text-center">Data Transfers</h4>
 			<h4 class="mb-4 text-center">Total {bytes ? "Bytes Transferred" : "Data Transfers"}: {total}</h4>
 			{#if total > 0}
-				<Heatmap data={heatmap_data} N={heatmap_N} bytes={bytes}/>
+				<Heatmap data={heatmap_data} N={heatmap_N} M={heatmap_N} bytes={bytes}/>
 			{/if}
 
 		</div>
